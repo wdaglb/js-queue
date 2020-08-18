@@ -1,0 +1,12 @@
+{
+  "name": "queue",
+  "version": "1.0.0",
+  "main": "./dist/queue.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}

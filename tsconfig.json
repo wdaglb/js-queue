@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+      "lib": [
+          "ES2015"
+      ],
+      "declaration": true,
+      "outDir": "./dist"
+  },
+  "exclude": [
+      "./dist"
+  ]
+}
