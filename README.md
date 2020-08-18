@@ -1,6 +1,14 @@
 # js-queue
 js浏览器端的一个队列插件
 
+## 安装
+
+```
+npm install @kingeast/queue
+or
+yarn add @kingeast/queue
+```
+
 ## 使用
 
 ```
