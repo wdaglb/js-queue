@@ -4,7 +4,7 @@ interface KQueueTake {
   data: any;
 }
 
-export class KQueue {
+export class KQueue<T, B> {
   // 并行任务数
   private readonly count: number;
 
@@ -18,16 +18,16 @@ export class KQueue {
   private successId: number[] = [];
 
   // 完成的任务返回值
-  private results: any[] = [];
+  private results: B[] = [];
 
   // 数据处理回调函数
-  private handler: undefined | ((data: any) => Promise<any>) = undefined;
+  private handler: undefined | ((data: T) => Promise<B>) = undefined;
 
   constructor(count: number) {
     this.count = count;
   }
 
-  public setTask(task: any[]) {
+  public setTask(task: T[]) {
     this.tasks = task.map((d, i) => {
       return {
         id: i,
@@ -38,11 +38,11 @@ export class KQueue {
     this.taskLength = this.tasks.length;
   }
 
-  public addHandler(call: (data: any) => Promise<any>) {
+  public addHandler(call: (data: T) => Promise<any>) {
     this.handler = call;
   }
 
-  private resolve(done: (results: any[]) => void) {
+  private resolve(done: (results: B[]) => void) {
     if (this.successId.length === this.taskLength) {
       done(this.results);
       return;
@@ -53,7 +53,7 @@ export class KQueue {
     const t = this.tasks.shift();
     if (t && this.handler) {
       t.ruining = true;
-      const idx = this.results.push({});
+      const idx = this.results.push({} as any);
       this.handler(t.data).then((result) => {
         t.ruining = false;
         if (idx > -1) {
@@ -65,7 +65,7 @@ export class KQueue {
     }
   }
 
-  public async start(): Promise<any[]> {
+  public async start(): Promise<B[]> {
     return new Promise(async (resolve, reject) => {
       if (!this.handler) {
         return reject('hander回调函数为空');

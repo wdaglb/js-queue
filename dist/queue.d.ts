@@ -1,4 +1,4 @@
-export declare class KQueue {
+export declare class KQueue<T, B> {
     private readonly count;
     private tasks;
     private taskLength;
@@ -6,8 +6,8 @@ export declare class KQueue {
     private results;
     private handler;
     constructor(count: number);
-    setTask(task: any[]): void;
-    addHandler(call: (data: any) => Promise<any>): void;
+    setTask(task: T[]): void;
+    addHandler(call: (data: T) => Promise<any>): void;
     private resolve;
-    start(): Promise<any[]>;
+    start(): Promise<B[]>;
 }
