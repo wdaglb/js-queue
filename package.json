@@ -2,7 +2,7 @@
   "name": "@kingeast/queue",
   "description": "js queue 队列",
   "homepage": "https://github.com/wdaglb/js-queue",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./dist/queue.js",
   "license": "MIT",
   "scripts": {
